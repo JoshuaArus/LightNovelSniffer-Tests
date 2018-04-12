@@ -68,9 +68,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigTests.cs" />
+    <Compile Include="Helpers\LnHelper.cs" />
+    <Compile Include="Helpers\WebCrawlerHelper.cs" />
     <Compile Include="Parser\CustomParser.cs" />
+    <Compile Include="Parser\ExceptionParser.cs" />
     <Compile Include="Parser\ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebCrawlerTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.xml">
