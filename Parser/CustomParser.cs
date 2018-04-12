@@ -21,7 +21,7 @@ namespace LightNovelSniffer_Tests.Parser
 
         public bool CanParse(string url)
         {
-            return url.Contains("LightNovelSnifferTests");
+            return url.Contains("customParser");
         }
 
         public void test(LnChapter chapter)

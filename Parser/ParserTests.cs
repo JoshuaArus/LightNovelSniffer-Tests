@@ -81,7 +81,7 @@ namespace LightNovelSniffer_Tests.Parser
             IParser xiaowazParser = new ParserFactory().GetParser("xiaowaz.fr");
             Assert.AreEqual(xiaowazParser.GetType(), typeof(XiaowazParser));
 
-            IParser customParser = new ParserFactory().GetParser("LightNovelSnifferTests");
+            IParser customParser = new ParserFactory().GetParser("customParser");
             Assert.AreEqual(customParser.GetType(), typeof(CustomParser));
 
             LnChapter chapter = customParser.Parse(null);
