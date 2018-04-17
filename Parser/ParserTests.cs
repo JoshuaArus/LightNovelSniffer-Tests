@@ -73,7 +73,15 @@ namespace LightNovelSniffer_Tests.Parser
         [ExpectedException(typeof(DynamicParserException))]
         public void DynamicParserException()
         {
-            new ParserFactory().RegisterParserFromAssemblyDllAndClass(GetType().Assembly.Location, typeof(ParserTests).FullName);
+            try
+            {
+                new ParserFactory().RegisterParserFromAssemblyDllAndClass(GetType().Assembly.Location, typeof(ParserTests).FullName);
+            }
+            catch (DynamicParserException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         private void CheckParsers()
