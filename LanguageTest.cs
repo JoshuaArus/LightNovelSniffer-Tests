@@ -28,7 +28,7 @@ namespace LightNovelSniffer_Tests
         [TestMethod]
         public void TestDefaultLanguageChange()
         {
-            CultureInfo ci = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper() == "FR" ? CultureInfo.GetCultureInfo("en-US") : CultureInfo.GetCultureInfo("de-DE");
+            CultureInfo ci = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper() == "FR" ? CultureInfo.GetCultureInfo("en") : CultureInfo.GetCultureInfo("de");
 
             ConfigTools.InitConf(ci);
             Assert.AreEqual(ci, ConfigTools.GetCurrentLanguage());
@@ -46,7 +46,8 @@ namespace LightNovelSniffer_Tests
             }
             catch (CoverException e)
             {
-                Console.WriteLine(e.Message.Equals(string.Format("Impossible de télécharger la cover {0}", url)));
+                Console.WriteLine(e.Message);
+                Assert.AreEqual(e.Message, string.Format("Impossible de télécharger la cover {0}.", url));
                 throw;
             }
         }
@@ -56,14 +57,15 @@ namespace LightNovelSniffer_Tests
         public void TestSpecifiedLanguageMessages()
         {
             string url = "coucou";
-            ConfigTools.InitConf(CultureInfo.GetCultureInfo("en-US"));
+            ConfigTools.InitConf(CultureInfo.GetCultureInfo("en"));
             try
             {
                 WebCrawler.DownloadCover(url);
             }
             catch (CoverException e)
             {
-                Console.WriteLine(e.Message.Equals(string.Format("Unable to download cover at {0}", url)));
+                Console.WriteLine(e.Message);
+                Assert.AreEqual(e.Message, string.Format("Unable to download cover at {0}.", url));
                 throw;
             }
         }
@@ -130,6 +132,15 @@ namespace LightNovelSniffer_Tests
                 Console.WriteLine(e.Message);
                 throw;
             }
+        }
+
+        [TestMethod]
+        public void TestAvailableLanguages()
+        {
+            ConfigTools.InitConf();
+            ICollection<CultureInfo> languages = ConfigTools.GetAvailableLanguage();
+            Assert.IsTrue(languages.Contains(CultureInfo.GetCultureInfo("en")));
+            Assert.IsTrue(languages.Contains(CultureInfo.GetCultureInfo("fr")));
         }
     }
 }
