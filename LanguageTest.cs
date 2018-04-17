@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Threading;
 using LightNovelSniffer.Config;
 using LightNovelSniffer.Exception;
+using LightNovelSniffer.Resources;
 using LightNovelSniffer.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace LightNovelSniffer_Tests
 {
@@ -38,6 +42,9 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(CoverException))]
         public void TestDefaultLanguageMessages()
         {
+            ResourceManager rm = new ResourceManager(typeof(LightNovelSniffer_Strings));
+            string defaultTemplate = rm.GetString("CoverDownloadExceptionMessage");
+
             string url = "coucou";
             ConfigTools.InitConf();
             try
@@ -47,7 +54,10 @@ namespace LightNovelSniffer_Tests
             catch (CoverException e)
             {
                 Console.WriteLine(e.Message);
-                Assert.AreEqual(e.Message, string.Format("Impossible de télécharger la cover {0}.", url));
+
+                string localizedTemplate = rm.GetString("CoverDownloadExceptionMessage");
+                Assert.AreEqual(e.Message, string.Format(defaultTemplate, url));
+                Assert.AreEqual(e.Message, string.Format(localizedTemplate, url));
                 throw;
             }
         }
@@ -56,8 +66,12 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(CoverException))]
         public void TestSpecifiedLanguageMessages()
         {
+            ResourceManager rm = new ResourceManager(typeof(LightNovelSniffer_Strings));
+            string defaultTemplate = rm.GetString("CoverDownloadExceptionMessage");
+
             string url = "coucou";
-            ConfigTools.InitConf(CultureInfo.GetCultureInfo("en"));
+            CultureInfo ci = CultureInfo.GetCultureInfo("de");
+            ConfigTools.InitConf(ci);
             try
             {
                 WebCrawler.DownloadCover(url);
@@ -65,7 +79,35 @@ namespace LightNovelSniffer_Tests
             catch (CoverException e)
             {
                 Console.WriteLine(e.Message);
-                Assert.AreEqual(e.Message, string.Format("Unable to download cover at {0}.", url));
+
+                string localizedTemplate = rm.GetString("CoverDownloadExceptionMessage");
+                Assert.AreEqual(e.Message, string.Format(localizedTemplate, url));
+                Assert.AreNotEqual(e.Message, string.Format(defaultTemplate, url));
+                throw;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CoverException))]
+        public void TestExternalLanguageMessages()
+        {
+            ResourceManager rm = new ResourceManager(typeof(LightNovelSniffer_Strings));
+            string defaultTemplate = rm.GetString("CoverDownloadExceptionMessage");
+
+            string url = "coucou";
+            CultureInfo ci = CultureInfo.GetCultureInfo("de");
+            CultureInfo.DefaultThreadCurrentUICulture = ci;
+            ConfigTools.InitConf();
+            try
+            {
+                WebCrawler.DownloadCover(url);
+            }
+            catch (CoverException e)
+            {
+                Console.WriteLine(e.Message);
+                string localizedTemplate = rm.GetString("CoverDownloadExceptionMessage");
+                Assert.AreEqual(e.Message, string.Format(localizedTemplate, url));
+                Assert.AreNotEqual(e.Message, string.Format(defaultTemplate, url));
                 throw;
             }
         }
