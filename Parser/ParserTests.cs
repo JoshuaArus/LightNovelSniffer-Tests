@@ -20,13 +20,14 @@ namespace LightNovelSniffer_Tests.Parser
         {
             List<IParser> parsers = new ParserFactory().AvailableParsers.ToList();
 
-            Assert.AreEqual(parsers.Count, 3);
+            Assert.AreEqual(parsers.Count, 4);
 
             List<Type> parserTypes = parsers.Select(p => p.GetType()).ToList();
 
             Assert.IsTrue(parserTypes.Contains(typeof(GravityTaleParser)));
             Assert.IsTrue(parserTypes.Contains(typeof(WuxiaworldParser)));
             Assert.IsTrue(parserTypes.Contains(typeof(XiaowazParser)));
+            Assert.IsTrue(parserTypes.Contains(typeof(ReadLightNovelParser)));
         }
 
         [TestMethod]
