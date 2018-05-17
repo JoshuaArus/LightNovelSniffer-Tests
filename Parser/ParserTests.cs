@@ -35,7 +35,7 @@ namespace LightNovelSniffer_Tests.Parser
         {
             new ParserFactory().RegisterParser(new CustomParser());
 
-            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 4);
+            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 5);
             CheckParsers();
         }
 
@@ -44,7 +44,7 @@ namespace LightNovelSniffer_Tests.Parser
         {
             new ParserFactory().RegisterParserFromAssemblyDllAndClass(GetType().Assembly.Location, typeof(CustomParser).FullName);
 
-            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 4);
+            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 5);
             CheckParsers();
         }
 
@@ -53,7 +53,7 @@ namespace LightNovelSniffer_Tests.Parser
         {
             new ParserFactory().RegisterAllParserFromAssembly(GetType().Assembly.Location);
 
-            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 5);
+            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 6);
             CheckParsers();
         }
 
@@ -66,7 +66,7 @@ namespace LightNovelSniffer_Tests.Parser
                     "LightNovelSniffer-Tests.dll").
                 Substring(6)); // remove "file://" returned by Path.GetDirectoryName
 
-            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 5);
+            Assert.AreEqual(new ParserFactory().AvailableParsers.Count, 6);
             CheckParsers();
         }
         
