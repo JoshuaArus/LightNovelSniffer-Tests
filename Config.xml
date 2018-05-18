@@ -4,4 +4,5 @@
     <interactiveMode>true</interactiveMode>
     <publisher>publisher</publisher>
     <defaultChapterTitle>defaultChapterTitle</defaultChapterTitle>
+    <maxNotExistingChapterBeforeStop>10</maxNotExistingChapterBeforeStop>
 </Parameters>
