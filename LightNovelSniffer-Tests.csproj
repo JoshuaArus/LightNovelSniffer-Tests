@@ -46,10 +46,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\itextsharp.dll</HintPath>
-    </Reference>
     <Reference Include="LightNovelSniffer">
       <HintPath>..\LightNovelSniffer\bin\Debug\LightNovelSniffer.dll</HintPath>
     </Reference>
