@@ -23,7 +23,7 @@ namespace LightNovelSniffer_Tests
         [TestMethod]
         public void TestDefaultLanguage()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             CultureInfo ci = ConfigTools.GetCurrentLanguage();
             Assert.AreEqual(ci, CultureInfo.CurrentCulture);
         }
@@ -33,7 +33,7 @@ namespace LightNovelSniffer_Tests
         {
             CultureInfo ci = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper() == "FR" ? CultureInfo.GetCultureInfo("en") : CultureInfo.GetCultureInfo("de");
 
-            ConfigTools.InitConf(ci);
+            ConfigTools.InitConf("Config.xml", ci);
             Assert.AreEqual(ci, ConfigTools.GetCurrentLanguage());
         }
 
@@ -45,7 +45,7 @@ namespace LightNovelSniffer_Tests
             string defaultTemplate = rm.GetString("CoverDownloadExceptionMessage");
 
             string url = "coucou";
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 WebCrawler.DownloadCover(url);
@@ -70,7 +70,7 @@ namespace LightNovelSniffer_Tests
 
             string url = "coucou";
             CultureInfo ci = CultureInfo.GetCultureInfo("de");
-            ConfigTools.InitConf(ci);
+            ConfigTools.InitConf("Config.xml", ci);
             try
             {
                 WebCrawler.DownloadCover(url);
@@ -96,7 +96,7 @@ namespace LightNovelSniffer_Tests
             string url = "coucou";
             CultureInfo ci = CultureInfo.GetCultureInfo("de");
             CultureInfo.DefaultThreadCurrentUICulture = ci;
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 WebCrawler.DownloadCover(url);
@@ -115,7 +115,7 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(LanguageException))]
         public void TestEmptyLanguageString()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 ConfigTools.SetLanguage("");
@@ -131,7 +131,7 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(LanguageException))]
         public void TestNullLanguageString()
         {
-            ConfigTools.InitConf();            
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 ConfigTools.SetLanguage((string)null);
@@ -147,7 +147,7 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(LanguageException))]
         public void TestInconsistentLanguageString()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 ConfigTools.SetLanguage("coucou");
@@ -163,7 +163,7 @@ namespace LightNovelSniffer_Tests
         [ExpectedException(typeof(LanguageException))]
         public void TestNullCultureInfo()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             try
             {
                 ConfigTools.SetLanguage((CultureInfo)null);
@@ -178,7 +178,7 @@ namespace LightNovelSniffer_Tests
         [TestMethod]
         public void TestAvailableLanguages()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             ICollection<CultureInfo> languages = ConfigTools.GetAvailableLanguage();
             Assert.IsTrue(languages.Contains(CultureInfo.GetCultureInfo("en")));
             Assert.IsTrue(languages.Contains(CultureInfo.GetCultureInfo("fr")));

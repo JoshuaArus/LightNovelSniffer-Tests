@@ -11,8 +11,8 @@ namespace LightNovelSniffer_Tests
         [ClassInitialize()]
         public static void ClassInit(TestContext context)
         {
-            ConfigTools.InitConf();
-            ConfigTools.InitLightNovels();
+            ConfigTools.InitConf("Config.xml");
+            ConfigTools.InitLightNovels("LightNovels.xml");
         }
 
         [TestMethod]

@@ -18,7 +18,7 @@ namespace LightNovelSniffer_Tests
         [TestInitialize()]
         public void Initialize()
         {
-            ConfigTools.InitConf();
+            ConfigTools.InitConf("Config.xml");
             Globale.INTERACTIVE_MODE = false;
         }
 
