@@ -35,17 +35,5 @@ namespace LightNovelSniffer_Tests
         {
             WebCrawler.DownloadCover("http://test");
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(ParserException))]
-        public void ParserException()
-        {
-            ParserFactory pf = new ParserFactory();
-            pf.RegisterParser(new ExceptionParser());
-            LnParameters ln = LnHelper.GetTestLnParameters();
-            WebCrawler wc = new WebCrawler(WebCrawlerHelper.GetWebCrawlerInterface(), WebCrawlerHelper.GetWebCrawlerInterface());
-
-            wc.DownloadChapters(ln, ln.urlParameters.First().language);
-        }
     }
 }
