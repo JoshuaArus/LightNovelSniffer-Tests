@@ -60,5 +60,14 @@ namespace LightNovelSniffer_Tests
             Assert.AreEqual(ln.urlParameters[0].firstChapterNumber, 1);
             Assert.AreEqual(ln.urlParameters[0].lastChapterNumber, 10);
         }
+
+        [TestMethod]
+        public void VerifLnAddAndReset()
+        {
+            ConfigTools.InitLightNovels("LightNovels.xml");
+            Assert.AreEqual(Globale.LN_TO_RETRIEVE.Count, 2);
+            ConfigTools.InitLightNovels("LightNovels.xml", true);
+            Assert.AreEqual(Globale.LN_TO_RETRIEVE.Count, 1);
+        }
     }
 }
