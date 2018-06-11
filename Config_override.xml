@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Parameters>
+    <outputFolder>outputFolder_override</outputFolder>
+    <interactiveMode>false</interactiveMode>
+    <publisher>publisher_override</publisher>
+    <defaultChapterTitle>defaultChapterTitle_override</defaultChapterTitle>
+    <maxChapterOnErrorCountBeforeStop>20</maxChapterOnErrorCountBeforeStop>
+</Parameters>

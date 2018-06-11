@@ -22,6 +22,18 @@ namespace LightNovelSniffer_Tests
             Assert.IsTrue(Globale.INTERACTIVE_MODE);
             Assert.AreEqual(Globale.PUBLISHER, "publisher");
             Assert.AreEqual(Globale.DEFAULT_CHAPTER_TITLE, "defaultChapterTitle");
+            Assert.AreEqual(Globale.MAX_CHAPTER_ON_ERROR_COUNT_BEFORE_STOP, 10);
+        }
+
+        [TestMethod]
+        public void VerifOverride()
+        {
+            ConfigTools.InitConf("Config_override.xml");
+            Assert.AreEqual(Globale.OUTPUT_FOLDER, "outputFolder_override");
+            Assert.IsFalse(Globale.INTERACTIVE_MODE);
+            Assert.AreEqual(Globale.PUBLISHER, "publisher_override");
+            Assert.AreEqual(Globale.DEFAULT_CHAPTER_TITLE, "defaultChapterTitle_override");
+            Assert.AreEqual(Globale.MAX_CHAPTER_ON_ERROR_COUNT_BEFORE_STOP, 20);
         }
 
         [TestMethod]
