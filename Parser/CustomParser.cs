@@ -11,9 +11,7 @@ namespace LightNovelSniffer_Tests.Parser
     {
         public LnChapter Parse(HtmlDocument doc)
         {
-            List<HtmlNode> paragraphs = new List<HtmlNode>();
-            HtmlNode p = HtmlTextNode.CreateNode("innerText");
-            paragraphs.Add(p);
+            List<LnNode> paragraphs = new List<LnNode>{new LnNode("outerHtml", "innerHtml", "innerText")};
             LnChapter c = new LnChapter("title", paragraphs);
             c.chapNumber = 12;
             return c;
@@ -28,6 +26,8 @@ namespace LightNovelSniffer_Tests.Parser
         {
             Assert.AreEqual(chapter.title, "title");
             Assert.AreEqual(chapter.paragraphs.Count, 1);
+            Assert.AreEqual(chapter.paragraphs.First().OuterHtml, "outerHtml");
+            Assert.AreEqual(chapter.paragraphs.First().InnerHtml, "innerHtml");
             Assert.AreEqual(chapter.paragraphs.First().InnerText, "innerText");
             Assert.AreEqual(chapter.chapNumber, 12);
         }
